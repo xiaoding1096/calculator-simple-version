@@ -13,12 +13,12 @@ buttons.forEach((button) => {
       currentInput = "";
       previousInput = "";
       operator = "";
-      displayInput.value = "" ;
+      displayInput.value = "";
     } else if (value === "=") {
       if (currentInput && previousInput && operator) {
         let numb1 = parseFloat(previousInput);
         let numb2 = parseFloat(currentInput);
-        let result ;
+        let result;
         switch (operator) {
           case "+":
             result = numb1 + numb2;
@@ -40,13 +40,17 @@ buttons.forEach((button) => {
         currentInput = result.toString();
         previousInput = "";
         operator = "";
-      } 
-    } else if (["+", "-", "*", "/"].includes(value)) {
-        operator = value;
-        previousInput = currentInput;
-        currentInput = "";
       }
-    else {
+    } else if (["+", "-", "*", "/"].includes(value)) {
+      operator = value;
+      previousInput = currentInput;
+      currentInput = "";
+    } else if (value === "%") {
+      if (currentInput) {
+        currentInput = (parseFloat(currentInput) / 100).toString();
+        displayInput.value = currentInput;
+      }
+    } else {
       if (value === "." && currentInput.includes(".")) {
         return;
       }
